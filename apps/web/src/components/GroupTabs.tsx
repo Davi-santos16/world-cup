@@ -17,7 +17,7 @@ export function GroupTabs({ selected, onChange }: Props) {
             onClick={() => onChange(group)}
             aria-pressed={active}
             aria-label={`Grupo ${group}`}
-            className={`grid size-9 place-items-center rounded-lg text-xs font-extrabold transition focus:outline-none focus:ring-2 focus:ring-lime-400 ${active ? "bg-lime-400 text-emerald-950 shadow-md" : "text-white/45 hover:bg-white/10 hover:text-white"}`}
+            className={`grid size-9 place-items-center rounded-lg text-xs font-extrabold transition focus:outline-none focus:ring-2 focus:ring-blue-400 ${active ? "bg-blue-600 text-white shadow-[0_0_20px_rgba(37,99,235,.35)]" : "text-white/45 hover:bg-white/10 hover:text-white"}`}
           >
             {group}
           </button>
