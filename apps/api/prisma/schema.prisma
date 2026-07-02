@@ -1,0 +1,48 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../prisma/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model NationalTeam {
+  id      Int    @id @default(autoincrement())
+  name    String
+  acronym String @unique
+  group   String
+  flag    String
+
+  homeMatches Match[] @relation("HomeTeam")
+  awayMatches Match[] @relation("AwayTeam")
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+
+  @@map("national_team")
+}
+
+model Match {
+  id         Int     @id @default(autoincrement())
+  homeTeamId Int     @map("home_team_id")
+  awayTeamId Int     @map("away_team_id")
+  homeGoals  Int?    @map("home_goals")
+  awayGoals  Int?    @map("away_goals")
+  phase      String  @default("Fase de Grupos")
+  round      Int
+  completed  Boolean @default(false)
+
+  homeTeam NationalTeam @relation("HomeTeam", fields: [homeTeamId], references: [id])
+  awayTeam NationalTeam @relation("AwayTeam", fields: [awayTeamId], references: [id])
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+
+  @@map("match")
+}

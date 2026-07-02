@@ -1,0 +1,68 @@
+# Dependências
+node_modules/
+**/node_modules/
+
+# Builds e caches
+dist/
+build/
+out/
+coverage/
+.vite/
+.turbo/
+.cache/
+*.tsbuildinfo
+*.map
+
+# Código gerado pelo Prisma (migrations continuam versionadas)
+**/prisma/generated/
+**/generated/prisma/
+
+# Variáveis de ambiente e segredos
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.key
+
+# Bancos locais e arquivos temporários
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+tmp/
+temp/
+*.tmp
+*.temp
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editores e sistema operacional
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Ferramentas locais de agentes
+.agents/
+.codex/
+
+# Relatórios de testes
+playwright-report/
+test-results/
+.nyc_output/
+
+# Arquivos locais do npm/yarn
+.npm/
+.yarn/cache/
+.yarn/unplugged/
+.pnp.*

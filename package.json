@@ -1,0 +1,22 @@
+{
+  "name": "world-cup",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -n api,web -c yellow,cyan \"npm run dev -w @world-cup/api\" \"npm run dev -w @world-cup/web\"",
+    "dev:api": "npm run dev -w @world-cup/api",
+    "dev:web": "npm run dev -w @world-cup/web",
+    "build": "npm run build --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "db:generate": "npm run db:generate -w @world-cup/api",
+    "db:migrate": "npm run db:migrate -w @world-cup/api",
+    "db:seed": "npm run db:seed -w @world-cup/api",
+    "db:studio": "npm run db:studio -w @world-cup/api"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
