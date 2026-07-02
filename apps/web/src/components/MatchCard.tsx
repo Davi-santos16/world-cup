@@ -27,16 +27,19 @@ export function MatchCard({ match, index = 0, onSave }: Props) {
     <article
       data-reveal
       style={{ transitionDelay: `${(index % 4) * 70}ms` }}
-      className="glass-panel group overflow-hidden rounded-2xl transition duration-500 hover:-translate-y-2 hover:border-blue-400/40"
+      className="glass-panel group overflow-hidden rounded-2xl transition-all duration-500 hover:-translate-y-2 hover:border-indigo-400/35 hover:shadow-[0_0_40px_rgba(99,102,241,.1)]"
     >
-      <div className="flex justify-between border-b border-white/10 bg-white/[.02] px-5 py-4 text-[9px] font-extrabold uppercase tracking-[.16em] text-white/35">
+      <div className="flex justify-between border-b border-white/[.06] bg-gradient-to-r from-white/[.02] to-transparent px-5 py-4 text-[9px] font-bold uppercase tracking-[.16em] text-white/30">
         <span>
           {match.phase} • Rodada {match.round}
         </span>
         <span
-          className={`rounded-full px-2.5 py-1 ${match.completed ? "bg-blue-500/15 text-blue-300" : "bg-amber-400/10 text-amber-300"}`}
+          className={`flex items-center gap-1.5 rounded-full px-3 py-1 ${match.completed ? "bg-emerald-500/10 text-emerald-400" : "bg-amber-400/10 text-amber-300"}`}
         >
-          <i className="mr-1.5 inline-block size-1.5 animate-pulse rounded-full bg-current" />
+          <span className="relative flex size-1.5">
+            <span className="absolute inline-flex size-full animate-ping rounded-full bg-current opacity-75" />
+            <span className="relative inline-flex size-1.5 rounded-full bg-current" />
+          </span>
           {match.completed ? "Finalizada" : "Agendada"}
         </span>
       </div>
@@ -51,7 +54,7 @@ export function MatchCard({ match, index = 0, onSave }: Props) {
           flag={match.homeTeam.flag}
           goals={match.homeGoals}
         />
-        <span className="font-display text-xl font-bold text-white/20">×</span>
+        <span className="font-display text-xl font-bold text-white/15">×</span>
         <TeamScore
           side="away"
           name={match.awayTeam.name}
@@ -61,7 +64,7 @@ export function MatchCard({ match, index = 0, onSave }: Props) {
         />
         <button
           disabled={saving}
-          className="col-span-full mt-3 rounded-xl border border-blue-400/20 bg-blue-600/15 px-4 py-3 text-[10px] font-extrabold uppercase tracking-wider text-blue-200 transition hover:bg-blue-600 hover:text-white disabled:cursor-wait disabled:opacity-60"
+          className="col-span-full mt-3 overflow-hidden relative rounded-xl border border-indigo-400/20 bg-indigo-600/10 px-4 py-3.5 text-[10px] font-bold uppercase tracking-wider text-indigo-200 transition-all duration-300 hover:bg-gradient-to-r hover:from-indigo-600 hover:to-violet-600 hover:text-white hover:shadow-[0_0_30px_rgba(99,102,241,.25)] disabled:cursor-wait disabled:opacity-50"
         >
           {saving ? "Salvando…" : "Salvar placar"}
         </button>
@@ -86,19 +89,19 @@ function TeamScore({ side, name, acronym, flag, goals }: TeamScoreProps) {
       required
       defaultValue={goals ?? ""}
       aria-label={`Gols de ${name}`}
-      className="h-12 w-12 rounded-xl border border-white/10 bg-black/20 text-center text-xl font-extrabold text-white outline-none transition focus:border-blue-400 focus:bg-blue-500/10 focus:ring-3 focus:ring-blue-500/10"
+      className="h-12 w-12 rounded-xl border border-white/8 bg-white/[.04] text-center font-display text-xl font-black text-white outline-none transition-all duration-300 focus:border-indigo-400/50 focus:bg-indigo-500/8 focus:shadow-[0_0_0_3px_rgba(99,102,241,.12)] tabular-nums"
     />
   );
   const team = (
     <>
-      <span className="overflow-hidden rounded-md border border-white/15">
+      <span className="overflow-hidden rounded-lg border border-white/10">
         <img
           src={flag}
           alt={`Bandeira de ${name}`}
-          className="h-6 w-9 object-cover"
+          className="h-7 w-10 object-cover"
         />
       </span>
-      <strong className="text-sm text-white">{acronym}</strong>
+      <strong className="text-sm font-bold text-white">{acronym}</strong>
     </>
   );
   return (

@@ -14,13 +14,14 @@ export function SectionHeading({
   light = false,
 }: Props) {
   return (
-    <div className="mb-8 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
+    <div className="mb-10 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
       <div>
         <span className="eyebrow">{eyebrow}</span>
         <h2
-          className={`mt-2 font-display text-4xl font-extrabold uppercase leading-none tracking-tight sm:text-5xl ${light ? "text-stone-50" : "text-emerald-950"}`}
+          className={`mt-3 font-display text-4xl font-black leading-none tracking-tight sm:text-5xl ${light ? "text-white" : "text-emerald-950"}`}
         >
           {title}
+          <span className="text-gradient-blue">.</span>
         </h2>
       </div>
       {action}
