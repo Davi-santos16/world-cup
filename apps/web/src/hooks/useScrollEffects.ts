@@ -2,12 +2,14 @@ import { useEffect } from "react";
 
 export function useScrollEffects() {
   useEffect(() => {
+    const observed = new WeakSet<Element>();
     const reveal = new IntersectionObserver(
       (entries) =>
         entries.forEach((entry) => {
-          if (entry.isIntersecting) entry.target.classList.add("is-visible");
-          else if (entry.boundingClientRect.top > 0)
-            entry.target.classList.remove("is-visible");
+          if (!entry.isIntersecting) return;
+
+          entry.target.classList.add("is-visible");
+          reveal.unobserve(entry.target);
         }),
       { threshold: 0.12, rootMargin: "0px 0px -5%" },
     );
@@ -15,7 +17,12 @@ export function useScrollEffects() {
     const observe = () =>
       document
         .querySelectorAll<HTMLElement>("[data-reveal]")
-        .forEach((element) => reveal.observe(element));
+        .forEach((element) => {
+          if (observed.has(element)) return;
+
+          observed.add(element);
+          reveal.observe(element);
+        });
     observe();
     const mutations = new MutationObserver(observe);
     mutations.observe(document.body, { childList: true, subtree: true });
